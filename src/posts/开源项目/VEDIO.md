@@ -3,7 +3,7 @@ title: VEDIO视频服务
 icon: fire
 ---
 ### 1、CWQ-VEDIO是一个流媒体服务的管理端
- github地址：https://github.com/chenweiquan-red/cwq-vedio.git
+ github地址：https://github.com/chenweiquan-red/cwq-public-vedio.git
  
  fork from : https://gitee.com/pan648540858/wvp-GB28181-pro.git
 
