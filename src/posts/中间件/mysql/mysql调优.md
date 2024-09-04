@@ -74,11 +74,47 @@ tag:
    ```text
       # 查询buffer pool大小, 默认为：128M， 显示默认为：134217728
       show variables like 'innodb_buffer_pool_size';
+  
+      # 设置缓冲区大小 默认是128M
+      [mysqld]
+        innodb_buffer_pool_size = 1G
+  
+      # 注意bufferpool的大小设置是否合理? 如果free buffer = 0，则设置过小
+      show engine innodb status;
+  
+      # 如果值大于0，缓冲池也是设置过小
+      show status like '%buffer_pool_wait%'
+  
+  
    ```
+- buffer pool 不够或者满了会发生什么？
+  - 使用LRU算法，将淘汰LRU链表尾部的页，如果这个被释放的页时脏页，就要强制执行checkpoint，将脏页刷新到磁盘。
 
 - 主要组成：数据页、索引页、undo页、锁信息、自适应哈希索引、插入缓存、数据字典
   - 个人理解
     ![](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/mysql/innodb1.png)
   - 网友理解
     ![](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/mysql/innodb2.png)
+  - 数据页中又分为脏页什么的，可以了解下：Free链表， Flush链表
+
+### 3、普通参数的查询及调整
+- 查看当前连接
+  ```shell
+   # 查看当前连接
+   SHOW processlist;
   
+   # 显示查询缓存，mysql8 之后去掉了
+   SHOW GLOBAL STATUS LIKE 'QCache\_%';
+  
+  # 默认无数据交互后8小时后断开连接
+  SHOW GLOBAL variables like 'wait_timeout';
+  
+  # 默认有数据交互的连接超时时长
+  SHOW GLOBAL variables like 'interactive_timeout';
+  
+  # 查询服务器端和客户端在一次传送数据包的过程当中最大允许的数据包大小 默认64M
+  show variables like 'max_allowed_packet';
+  
+  # 查询最大连接数
+  show variables like 'max_connections';
+  ```
