@@ -55,7 +55,7 @@ java \
 ![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/jvm/jvm/seMetaSpace.png)
 
 
-### 记录一次OOM线上问题，以及dump prof文件下来分析
+### 记录一次OOM线上问题，以及dump prof文件分析内存泄露情况，发现是 GC root 指向的是 arrayList<Object> 对象
 ```shell
 # 设置OOM时，导出prof文件，56m堆内存只是演示数据，理论上还要有新生代，老年代内存及占比，适度调整老年代内存
 -Xms56m -Xmx56m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heapsump.prof
