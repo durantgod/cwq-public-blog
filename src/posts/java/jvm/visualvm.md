@@ -55,7 +55,7 @@ java \
 ![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/jvm/jvm/seMetaSpace.png)
 
 
-### 记录一次OOM线上问题，以及dump prof文件分析内存泄露情况，发现是 GC root 指向的是 arrayList<Object> 对象
+### 记录一次OOM线上问题，以及dump prof文件分析内存泄露情况，发现 GCRoot 指向的是 arrayList<Object> 对象，具体代码是不断往全局list中存放对象而没有及时释放。
 
   ```shell
   # 设置OOM时，导出prof文件，56m堆内存只是演示数据，理论上还要有新生代，老年代内存及占比，适度调整老年代内存
@@ -63,5 +63,4 @@ java \
   ```
 
 - 使用jvm分析工具  visualvm 分析内存溢出的根本原因，如下截图：
-
-  ![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/jvm/vitool.png)
+  - ![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/jvm/vitool.png)
