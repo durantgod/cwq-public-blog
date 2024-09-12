@@ -2,7 +2,7 @@
 title: mysql 调优
 icon: fire
 category:
-  - mysqll
+  - mysql
 tag:
   - mysql 调优
 ---
