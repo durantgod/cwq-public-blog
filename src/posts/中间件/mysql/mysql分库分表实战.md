@@ -47,7 +47,7 @@ tag:
 
 #### 2.3、sharding-jdbc 配置
 - 模式配置，Memory（默认），Standalone，Cluster
-- 
+- ss
 
 
 ### 3、实战
