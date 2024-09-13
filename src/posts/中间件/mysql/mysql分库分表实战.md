@@ -44,7 +44,10 @@ tag:
 - 数据加密
 - 弹性伸缩
 
-#### 2.3、
+
+#### 2.3、sharding-jdbc 配置
+- 模式配置，Memory（默认），Standalone，Cluster
+- 
 
 
 ### 3、实战
