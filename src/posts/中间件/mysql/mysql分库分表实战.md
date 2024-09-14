@@ -47,10 +47,106 @@ tag:
 
 #### 2.3、sharding-jdbc 配置
 - 模式配置，Memory（默认），Standalone，Cluster
-- ss
+  - 数据源配置
+    ```shell
+      dataSources:
+        ds_1:
+          dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+          driverClassName: com.mysql.jdbc.Driver
+          jdbcUrl: jdbc:mysql://localhost:3306/ds_1
+          username: root
+          password:
+        ds_2:
+          dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+          driverClassName: com.mysql.jdbc.Driver
+          jdbcUrl: jdbc:mysql://localhost:3306/ds_2
+          username: root
+          password:
+    ```
+    - 分片规则配置
+      ```shell
+        rules:
+          - !SHARDING
+            tables: # 数据分片规则配置
+            <logic-table-name> (+): # 逻辑表名称
+            actualDataNodes (?): # 由数据源名 + 表名组成（参考 Inline 语法规则）
+            databaseStrategy (?): # 分库策略，缺省表示使用默认分库策略，以下的分片策略只能选其一
+            standard: # 用于单分片键的标准分片场景
+            shardingColumn: # 分片列名称
+            shardingAlgorithmName: # 分片算法名称
+            complex: # 用于多分片键的复合分片场景
+            shardingColumns: # 分片列名称，多个列以逗号分隔
+            shardingAlgorithmName: # 分片算法名称
+            hint: # Hint 分片策略
+            shardingAlgorithmName: # 分片算法名称
+            none: # 不分片
+            tableStrategy: # 分表策略，同分库策略
+            keyGenerateStrategy: # 分布式序列策略
+            column: # 自增列名称，缺省表示不使用自增主键生成器
+            keyGeneratorName: # 分布式序列算法名称
+            autoTables: # 自动分片表规则配置
+            t_order_auto: # 逻辑表名称
+            actualDataSources (?): # 数据源名称
+            shardingStrategy: # 切分策略
+            standard: # 用于单分片键的标准分片场景
+            shardingColumn: # 分片列名称
+            shardingAlgorithmName: # 自动分片算法名称
+            bindingTables (+): # 绑定表规则列表
+            - <logic_table_name_1, logic_table_name_2, ...>
+            - <logic_table_name_1, logic_table_name_2, ...>
+              broadcastTables (+): # 广播表规则列表
+            - <table-name>
+            - <table-name>
+            defaultDatabaseStrategy: # 默认数据库分片策略
+            defaultTableStrategy: # 默认表分片策略
+            defaultKeyGenerateStrategy: # 默认的分布式序列策略
+            defaultShardingColumn: # 默认分片列名称
+    
+            # 分片算法配置
+            shardingAlgorithms:
+            <sharding-algorithm-name> (+): # 分片算法名称
+            type: # 分片算法类型
+            props: # 分片算法属性配置
+            # ...
+    
+            # 分布式序列算法配置
+            keyGenerators:
+            <key-generate-algorithm-name> (+): # 分布式序列算法名称
+            type: # 分布式序列算法类型
+            props: # 分布式序列算法属性配置
+            # ...
+        ```
+      
+    - 读写分离配置
+      ```shell
+      rules:   
+      - !READWRITE_SPLITTING
+        dataSources:
+        <data-source-name> (+): # 读写分离逻辑数据源名称
+        type: # 读写分离类型，比如：Static，Dynamic
+        props:
+        auto-aware-data-source-name: # 自动发现数据源名称（与数据库发现配合使用）
+        write-data-source-name: # 写库数据源名称
+        read-data-source-names: # 读库数据源名称，多个从数据源用逗号分隔
+        loadBalancerName: # 负载均衡算法名称
+
+        # 负载均衡算法配置
+        loadBalancers:
+        <load-balancer-name> (+): # 负载均衡算法名称
+        type: # 负载均衡算法类型
+        props: # 负载均衡算法属性配置
+        ```
+    - 分布式事务
+      - XA
+      - LOCAL
 
 
 ### 3、实战
+实战项目地址：https://github.com/durantgod/cwq-public-shardingSphere
 
+
+![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/mysql/shardingjdbc.png)
+
+项目说明：
 
 
