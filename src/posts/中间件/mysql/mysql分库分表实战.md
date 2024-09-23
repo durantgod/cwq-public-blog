@@ -144,9 +144,12 @@ tag:
 ### 3、实战
 实战项目地址：https://github.com/durantgod/cwq-public-shardingSphere
 
+配置解读：
 
 ![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/mysql/shardingjdbc.png)
 
-项目说明：
+
+分片策略解读：
+![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/mysql/shardingsphere3.png)
 
 
