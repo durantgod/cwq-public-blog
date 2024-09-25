@@ -153,3 +153,8 @@ tag:
 ![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/mysql/shardingsphere3.png)
 
 
+具体的分片策略原理图：
+![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/mysql/shardingHashAlg.png)
+
+对应实际项目中的代码实现：
+![img.png](https://wqknowledge.oss-cn-shenzhen.aliyuncs.com/mysql/hashalgcode.png)
